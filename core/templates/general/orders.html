@@ -1,0 +1,23 @@
+{% extends "general/layout.html" %}
+
+{% block page_content %}
+{% include "_includes/_messages.html" %}
+<h2>My Orders History</h2>
+
+{% for o in orders %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <p><strong>Order ID:</strong> #{{ o.id }}</p>
+        <p><strong>Date:</strong> {{ o.created_at|date:"d/m/Y H:i" }}</p>
+        <p><strong>Total:</strong> {{ o.total_price }} €</p>
+        
+        <ul>
+            {% for item in o.items.all %}
+                <li>{{ item.product.name }} (x{{ item.quantity }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% empty %}
+    <p>You haven't made any orders yet.</p>
+{% endfor %}
+
+{% endblock %}

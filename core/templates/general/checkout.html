@@ -1,0 +1,13 @@
+{% extends 'general/layout.html' %}
+{% load crispy_forms_tags %}
+{% block head_title %}CheckOut | The Falcon Ritual{% endblock %}
+{% block page_title %}<h3>Check Out</h3>{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm and Pay</button>
+    </form>
+</div>
+{% endblock %}

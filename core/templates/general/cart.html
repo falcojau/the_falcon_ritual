@@ -1,0 +1,35 @@
+{% extends "general/layout.html" %}
+
+{% block page_content %}
+    <h2>Your Cart</h2>
+    {% include "_includes/_messages.html" %}
+    {% if products_in_cart %}
+        <ul>
+            {% for p in products_in_cart %}
+            <img width='100' src="{{ p.image_product.url }}">
+                <li style="margin-bottom: 15px;">
+                    <strong>{{ p.name }}</strong> <br>
+                    <a href="{% url 'decrement_cart' p.id %}" style="text-decoration: none; padding: 0 5px; border: 1px solid #ccc;"> - </a>
+
+                    Quantity: {{ p.quantity }}  
+                    <a href="{% url 'add_to_cart' p.id %}" style="text-decoration: none; padding: 0 5px; border: 1px solid #ccc;"> + </a>
+
+                    Price: {{ p.price }} € |
+                    <a href="{% url 'remove_from_cart' p.id %}" style="color: red; margin-left: 10px;">Delete all</a> |
+
+                    Subtotal: {{ p.subtotal }} €
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+        <h3>Total: {{ total_cart }} €</h3>
+        
+        <button><a href="{% url 'checkout' %}">Go to Checkout</a></button>
+        <a href="{% url 'home' %}">Continue shopping</a>
+
+    {% else %}
+        <p>Your cart is empty 🕸️</p>
+        <a href="{% url 'home' %}">Back to Home</a>
+    {% endif %}
+{% endblock %}

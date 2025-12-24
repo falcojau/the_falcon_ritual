@@ -1,0 +1,17 @@
+<header>
+    <h1>The Falcon Ritual</h1>
+    <nav>
+        <ul>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'home' %}">Home 🏚️​</a>​</li>
+                <li><a href="{% url 'my_orders' %}">My Orders 📦​​</a></li>
+                <li><a href="{% url 'view_cart' %}">My Cart 🛒​</a>​</li>
+                <li><a href="{% url 'logout' %}">Exit 🚪​</a>​</li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login 🔑</a></li>
+                <li><a href="{% url 'register' %}">Sign Up 📝</a>​</li>
+            {% endif %}
+                <li><a href="{% url 'contact' %}">Contact us 📞​</a>​</li>
+        </ul>
+    </nav>
+</header>

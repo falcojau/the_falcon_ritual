@@ -1,0 +1,38 @@
+{% extends "general/layout.html" %}
+{% block head_title %}Home | The Falcon Ritual{% endblock %}
+{% block page_title %}<h3>Home 🏚️</h3>{% endblock %}
+
+{% block page_content %}
+{% include "_includes/_messages.html" %}
+    <h3>Our Products</h3>
+    
+    <div style="display: flex; gap: 40px;">
+        <ul style="list-style: none; padding: 0; min-width: 150px;">
+            <li><strong>Categories</strong></li>
+            {% for cat in categories %}
+                <li style="margin-top: 5px;">
+                    <a href="{% url 'category_filter' cat.slug %}">{{ cat.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+            {% for p in products %}
+                <div style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center;">
+                    {% if p.image_product %}
+                        <img src="{{ p.image_product.url }}" alt="{{ p.name }}" style="max-width: 100%; height: 150px; object-fit: cover; margin-bottom: 10px;">
+                    {% else %}
+                        <div style="height: 150px; background: #eee; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                            <span>No image</span>
+                        </div>
+                    {% endif %}
+
+                    <h4 style="margin: 10px 0;">{{ p.name }}</h4>
+                    <p><a href="{% url 'product_detail' p.pk %}">See details</a></p>
+                    <p style="font-weight: bold; color: #2c3e50;">{{ p.price }} €</p>
+                    <button style="cursor: pointer; padding: 5px 10px;"><a href="{% url 'add_to_cart' p.id %}">Add to Cart</a></button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "general/layout.html" %}
+{% block head_title %}Product Detail | The Falcon Ritual{% endblock %}
+{% block page_title %}<h3>Product Detail</h3>{% endblock %}
+
+{% block page_content %}
+
+<section>
+    <div>
+        <p>{% if product.image_product %}
+                <img width='250' src="{{ product.image_product.url }}">
+            {% else %}
+                There is no picture for this product
+            {% endif %}
+        </p>
+        <p><strong>Name:</strong> {{ product.name }}</p>
+        <p><strong>Description:</strong> {{ product.description }}</p>
+        <p><strong>Price:</strong> {{ product.price }}</p>
+        <p><strong>Category:</strong> {{ product.category }}</p>
+        <a href="{% url 'add_to_cart' product.id %}" style="text-decoration: none; padding: 0 5px; border: 1px solid #ccc;">Add to Cart</a>
+        <hr>
+        <a href="{% url 'home' %}">Back to products</a>
+    </div>
+</section>
+
+{% endblock %}
